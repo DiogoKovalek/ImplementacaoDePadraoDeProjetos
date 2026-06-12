@@ -8,8 +8,23 @@ Este é um trabalho para a disciplina de Engenharia de Software do curso Bachare
 
 ### Comportamental -> Observer
 * **Contexto**<br>
+Durante o desenvolvimento de um jogo na Unity, diferentes sistemas precisam reagir quando determinados eventos acontecem. Por exemplo, quando o jogador perde todas as vidas, diversos componentes do jogo devem executar ações automaticamente, como exibir a tela de “Game Over”, tocar um efeito sonoro e salvar a pontuação final.<br>
+Inicialmente, essas funcionalidades estavam diretamente conectadas entre si, fazendo com que a classe do jogador tivesse referências diretas para todos os outros sistemas do jogo.<br>
+<br>
+
 * **Problema**<br>
+A abordagem inicial gerava alto acoplamento entre as classes, pois o objeto do jogador precisava conhecer todos os componentes que deveriam reagir ao evento de morte.<br>
+Além disso, sempre que uma nova funcionalidade precisasse responder ao evento, como adicionar partículas visuais ou registrar estatísticas, seria necessário modificar o código do jogador novamente, violando o princípio de aberto/fechado (Open/Closed Principle).<br>
+Esse modelo dificultava a manutenção, a escalabilidade e a reutilização do código.<br>
+<br>
+
 * **Solução**<br>
+Para resolver esse problema, foi utilizado o padrão comportamental Observer.<br>
+Nesse padrão, o objeto principal, chamado de `Subject`, torna-se responsável apenas por emitir notificações quando um evento ocorre. Os demais objetos interessados, chamados de `Observers`, podem se inscrever para receber essas notificações automaticamente.<br>
+Na implementação em C#, o padrão foi desenvolvido utilizando `event` e `delegate`, permitindo que diferentes sistemas do jogo escutem eventos sem que o objeto principal precise conhecer diretamente cada um deles.<br>
+Dessa forma, o sistema ficou menos acoplado, mais modular e mais fácil de expandir, permitindo adicionar novos observadores sem alterar a lógica principal do jogador.<br>
+<br>
+
 * **Explicação do código**<br>
 Presente dentro do código
 
@@ -43,4 +58,4 @@ Presente dentro do código
 # Referencias
 * [(Marco Tulio Valente. Engenharia de Software Moderna, Capitulo 6)](https://engsoftmoderna.info/cap6.html)<br>
 * [REFACTORING GURU](https://refactoring.guru/pt-br/design-patterns)<br>
-* Foi Usado [ChatGPT](https://chatgpt.com/) Para fins de revisão de código e texto, além de sujestão para o Para o problema do padrão de projeto
+* Foi Usado [ChatGPT](https://chatgpt.com/) Para fins de revisão de texto, elaborar e revisar código, além de sujestão para o Para o problema do padrão de projeto
